@@ -5,17 +5,19 @@ import Footer from "./Footer";
 export default class Layout extends React.Component {
   constructor() {
     super();
-    this.state = { name: "ShowKa" };
+    this.state = {
+      title: "Welcome"
+    };
   }
+  changeTitle(title) {
+    this.setState({ title }); // {title: title}
+  }
+  // Headerコンポネントに changeTitle()をchangeTitleというプロパティに渡している。
+  // bind(this) とすることで、Header#changeTitle内でこのLayoutインスタンスを扱える。
   render() {
-    const title = "Welcome to React Tutorial"
-    setTimeout(() => {
-      this.setState({ name: "ShowKa2 : state.name updated!" });
-    }, 1000);
     return (
       <div>
-        <Header title={title} />
-        {this.state.name}
+        <Header changeTitle={this.changeTitle.bind(this)} title={this.state.title} />
         <Footer />
       </div>
     );
